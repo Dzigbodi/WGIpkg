@@ -51,3 +51,33 @@ print(head(df))
     ## 4       VAB               Angola  AGO 2020 Estimate -0.81600285
     ## 5       VAB              Albania  ALB 2020 Estimate  0.08640257
     ## 6       VAB United Arab Emirates  ARE 2020 Estimate -1.17824411
+
+Download a specific indicator
+
+``` r
+df<-read_wgi(startyear = 2020, endyear = 2022,indicator = "VAB")
+print(head(df))
+```
+
+    ##   Indicator    Country_Territory Code Year Variable       Value
+    ## 1       VAB                Aruba  ABW 2020 Estimate  1.28214300
+    ## 2       VAB              Andorra  ADO 2020 Estimate  1.08625340
+    ## 3       VAB          Afghanistan  AFG 2020 Estimate -1.07768857
+    ## 4       VAB               Angola  AGO 2020 Estimate -0.81600285
+    ## 5       VAB              Albania  ALB 2020 Estimate  0.08640257
+    ## 6       VAB United Arab Emirates  ARE 2020 Estimate -1.17824411
+
+Download a specific estimate
+
+``` r
+df<-read_wgi(startyear = 2020, endyear = 2022,indicator = "VAB", variable = "Estimate")
+print(head(df))
+```
+
+    ##   Indicator    Country_Territory Code Year Variable       Value
+    ## 1       VAB                Aruba  ABW 2020 Estimate  1.28214300
+    ## 2       VAB              Andorra  ADO 2020 Estimate  1.08625340
+    ## 3       VAB          Afghanistan  AFG 2020 Estimate -1.07768857
+    ## 4       VAB               Angola  AGO 2020 Estimate -0.81600285
+    ## 5       VAB              Albania  ALB 2020 Estimate  0.08640257
+    ## 6       VAB United Arab Emirates  ARE 2020 Estimate -1.17824411
