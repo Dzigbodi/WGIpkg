@@ -14,7 +14,11 @@ Two mains functions are built to perform this extraction.
 The extraction can be done for whole set of countries, or for specific
 list of countries or single country.
 
-The indicator
+``` r
+#devtools::install_github("Dzigbodi/WGIpkg")
+```
+
+Indicator
 
 ``` r
 library(WGIpkg)
