@@ -8,6 +8,7 @@ read_wgi(
   startyear = NULL,
   endyear = NULL,
   country = NULL,
+  indicator = NULL,
   variable = NULL,
   rm.na = TRUE
 )
@@ -19,7 +20,10 @@ read_wgi(
 
 \item{country}{vector of the countries , default is all the countries present in WGI.}
 
-\item{variable}{Indicator name, default setting is all indicators}
+\item{indicator}{is vector of string values: VAB= Voice and Accountability,
+PSV="Political Stability No Violence, GEN=Government Effectiveness", RGQ=Regulatory Quality, ROL=Rule of Law, and COF=Control of Corruption.}
+
+\item{variable}{is string value such as : "Estimate", "StdErr" ,  "NumSrc" ,  "Rank" ,    "Lower", and    "Upper"}
 
 \item{rm.na}{if it is FALSE preserve missing values, default is TRUE}
 }

@@ -50,7 +50,9 @@ load_wgi_indicator<-function(indicatorname){
 #' @param startyear start year
 #' @param endyear end year
 #' @param country vector of the countries , default is all the countries present in WGI.
-#' @param variable Indicator name, default setting is all indicators
+#' @param indicator is vector of string values: VAB= Voice and Accountability,
+#' PSV="Political Stability No Violence, GEN=Government Effectiveness", RGQ=Regulatory Quality, ROL=Rule of Law, and COF=Control of Corruption.
+#' @param variable is string value such as : "Estimate", "StdErr" ,  "NumSrc" ,  "Rank" ,    "Lower", and    "Upper"
 #' @param rm.na if it is FALSE preserve missing values, default is TRUE
 #'
 #' @return data.frame
@@ -58,16 +60,27 @@ load_wgi_indicator<-function(indicatorname){
 #'
 #' @examples
 #' wgi_df<-read_wgi(startyear=2021, endyear=2022)
-read_wgi <- function(startyear=NULL, endyear=NULL, country=NULL, variable=NULL, rm.na=TRUE) {
+read_wgi <- function(startyear=NULL,
+                     endyear=NULL,
+                     country=NULL,
+                     indicator=NULL,
+                     variable=NULL,
+                     rm.na=TRUE) {
 
-
-
-  list_indicator<-c(VAB="VoiceandAccountability",
+  set_indicator<-c(VAB="VoiceandAccountability",
                     PSV="Political StabilityNoViolence",
                     GEN="GovernmentEffectiveness",
                     RGQ="RegulatoryQuality",
                     ROL="RuleofLaw",
                     COF="ControlofCorruption")
+
+  if(is.null(indicator)){
+    list_indicator<-set_indicator
+  }else{
+    list_indicator<-set_indicator[names(set_indicator)%in%indicator]
+  }
+
+
 
 
   wgi_df<-lapply(names(list_indicator), function(indicatorname){
