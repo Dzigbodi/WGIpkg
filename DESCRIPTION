@@ -1,0 +1,16 @@
+Package: WGIpkg
+Title: This package aims to extract WGI data
+Version: 0.0.0.9000
+Authors@R: 
+    person("Richard", "Amegble", , "amegblerichard@hotmail.com", role = c("aut", "cre"))
+Description: WGIpkg allowes to extract WGI data.
+License: `use_mit_license()`
+Encoding: UTF-8
+Imports:
+    dplyr,
+    tidyr,
+    stringr,
+    openxlsx,
+    stats
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
