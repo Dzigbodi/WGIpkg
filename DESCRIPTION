@@ -4,13 +4,15 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Richard", "Amegble", , "amegblerichard@hotmail.com", role = c("aut", "cre"))
 Description: WGIpkg allowes to extract WGI data.
-License: `use_mit_license()`
+License: MIT + file LICENSE
 Encoding: UTF-8
 Imports:
     dplyr,
     tidyr,
-    stringr,
-    openxlsx,
-    stats
+    readxl,
+     curl,
+     stats,
+     rlang,
+     utils
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

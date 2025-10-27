@@ -2,7 +2,7 @@
 % Please edit documentation in R/wgi.R
 \name{read_wgi}
 \alias{read_wgi}
-\title{read_wgi}
+\title{Read and tidy World Governance Indicators (WGI) from the official ZIP}
 \usage{
 read_wgi(
   startyear = NULL,
@@ -10,29 +10,59 @@ read_wgi(
   country = NULL,
   indicator = NULL,
   variable = NULL,
-  rm.na = TRUE
+  na.rm = TRUE
 )
 }
 \arguments{
-\item{startyear}{start year}
+\item{startyear}{Integer or \code{NULL}. First year to keep. If \code{NULL}, uses min available.}
 
-\item{endyear}{end year}
+\item{endyear}{Integer or \code{NULL}. Last year to keep. If \code{NULL}, uses max available.}
 
-\item{country}{vector of the countries , default is all the countries present in WGI.}
+\item{country}{Character vector of country names to keep (matches the \code{countryname} column).
+If \code{NULL}, keeps all.}
 
-\item{indicator}{is vector of string values: VAB= Voice and Accountability,
-PSV="Political Stability No Violence, GEN=Government Effectiveness", RGQ=Regulatory Quality, ROL=Rule of Law, and COF=Control of Corruption.}
+\item{indicator}{Character vector of indicator \strong{codes} to keep
+(subset of \code{c("va","pv","ge","rq","rl","cc")}). If \code{NULL}, keeps all six.}
 
-\item{variable}{is string value such as : "Estimate", "StdErr" ,  "NumSrc" ,  "Rank" ,    "Lower", and    "Upper"}
+\item{variable}{Character vector of WGI variable names to keep among
+\code{c("estimate","stddev","pctrank","nsource","pctranklower","pctrankupper")}.
+If \code{NULL}, keeps all.}
 
-\item{rm.na}{if it is FALSE preserve missing values, default is TRUE}
+\item{na.rm}{Logical. If \code{TRUE} (default), drop rows with \code{NA} in \code{value}.}
 }
 \value{
-data.frame
+A tibble with at least:
+\code{countryname}, \code{indicator}, \code{year}, \code{variable}, \code{value}, plus any other columns
+present in the source file (with lower-cased names).
 }
 \description{
-read_wgi
+\strong{Edict:} Download the WGI Excel bundle, extract the main table,
+and return a tidy tibble filtered by years, countries, indicator codes,
+and variable type (e.g., \code{estimate}, \code{stddev}, \code{pctrank}, …).
+
+Indicator codes:
+\itemize{
+\item \code{va} = Voice and Accountability
+\item \code{pv} = Political Stability/Absence of Violence
+\item \code{ge} = Government Effectiveness
+\item \code{rq} = Regulatory Quality
+\item \code{rl} = Rule of Law
+\item \code{cc} = Control of Corruption
+}
+}
+\details{
+\itemize{
+\item Relies on a helper \code{read_zip_xlsx(url)} that downloads/unzips the ZIP and returns
+the first workbook's first sheet as a tibble (as you defined earlier).
+\item Column names are lower-cased on read to avoid case-mismatch issues.
+\item The function validates that expected WGI columns exist and errors clearly otherwise.
+}
 }
 \examples{
-wgi_df<-read_wgi(startyear=2021, endyear=2022)
+\dontrun{
+wgi <- read_wgi(startyear = 2010, endyear = 2023, indicator = c("ge","rl"),
+                variable = c("estimate","pctrank"))
+dplyr::count(wgi, indicator, year)
+}
+
 }
